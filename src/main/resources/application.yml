@@ -1,0 +1,19 @@
+server:
+  port: 8080   # Change the default port
+
+spring:
+  application:
+    name: Expense-sharing-API  # Application name
+  datasource:
+    url: jdbc:mysql://localhost:3306/auth
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        transaction:
+          jta:
+            platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
+    ddl-auto: update
+    show-sql: true  # Print SQL queries in logs
