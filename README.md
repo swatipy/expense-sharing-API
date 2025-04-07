@@ -40,6 +40,8 @@ mvn spring-boot:run
 The API will start on: http://localhost:8080
 
 ### Project Structure
+
+ ```
 src/
 ├── main/
 │   ├── java/
@@ -51,12 +53,18 @@ src/
 │   └── resources/
 │       └── application.yml
 └── test/
+ ```
 
-### Sample API Endpoints
-**|Method   | **Endpoint**  |         Description   |**
-  POST	    /users	            Create a new user
-  POST	    /expenses	          Add an expense 
-  POST	    /show               Show balances
+
+
+###  Sample API Endpoints
+
+| Method | Endpoint    | Description        |
+|--------|-------------|--------------------|
+| POST   | `/users`    | Create a new user  |
+| POST   | `/expenses` | Add an expense     |
+| POST   | `/show`     | Show balance       |
+
   
 
 
