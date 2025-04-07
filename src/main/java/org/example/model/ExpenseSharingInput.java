@@ -2,60 +2,41 @@ package org.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class ExpenseSharingInput {
-    private final String expenseSharingCommand;
-    private final String paidBy;
-    private final double amountPaid;
-    private final int numberOfUsers;
-    private final List<String> userIds;
-    private final String splitType;
-    private final List<Double> values;
+public class ExpenseSharingInput implements UserBalanceInterface {
+    private  ExpenseSharingCommand command;
 
-    public ExpenseSharingInput(String command, String paidBy, double amountPaid, int numberOfUsers, List<String> userIds, String splitType, List<Double> values) {
-        this.expenseSharingCommand = command;
-        this.paidBy = paidBy;
-        this.amountPaid = amountPaid;
-        this.numberOfUsers=numberOfUsers;
-        this.userIds = userIds;
-        this.splitType = splitType;
-        this.values = values;
+    private Expense expense; // If the command is add expense then expense will be present
+    private String userId; // If the command is show balance then userId will be present
+
+    public ExpenseSharingInput() {
+        // No-arg constructor needed for deserialization
     }
 
-    public static ExpenseSharingInput parse(String command) {
-        String[] parts = command.split(" ");
-        List<String> userIds=new ArrayList<>();
-        String splitType;
-        List<Double> values=new ArrayList<>();
-
-
-        if (parts[0].equals("EXPENSE")) {
-            String paidBy= parts[1];
-            double amountPaid = Double.parseDouble(parts[2]);
-            int numOfUsers = Integer.parseInt(parts[3]);
-
-            for (int i = 0; i < numOfUsers; i++) {
-                userIds.add(parts[4 + i]);
-            }
-            splitType = parts[4 + numOfUsers];
-
-            for (int i = 5 + numOfUsers; i < parts.length; i++) {
-                values.add(Double.parseDouble(parts[i]));
-            }
-            return new ExpenseSharingInput("EXPENSE", paidBy, amountPaid, numOfUsers,userIds, splitType, values);
-        } else if (parts[0].equals("SHOW")) {
-            return new ExpenseSharingInput("SHOW", parts.length > 1 ? parts[1] : null, 0, 0, null, null, null);
-        }
-        throw new IllegalArgumentException("Invalid command format");
+    public ExpenseSharingInput(ExpenseSharingCommand command, Expense expense) {
+        this.command = command;
+        this.expense = expense;
     }
 
-    // Getters
-    public String getExpenseSharingCommand() { return expenseSharingCommand; }
-    public String getPaidBy() { return paidBy; }
-    public double getAmountPaid() { return amountPaid; }
-    public int getNumberOfUsers() {return numberOfUsers;}
-    public List<String> getUserIds() { return userIds; }
-    public String getSplitType() { return splitType; }
-    public List<Double> getValues() { return values; }
+    public ExpenseSharingInput(ExpenseSharingCommand command, String userId) {
+        this.command = command;
+        this.userId = userId;
+    }
+
+    public ExpenseSharingInput(ExpenseSharingCommand expenseSharingCommand) {
+        this.command=expenseSharingCommand;
+    }
+
+    public ExpenseSharingCommand getCommand() {
+        return command;
+    }
+
+    public Expense getExpense() {
+        return expense;
+    }
+
+    public Optional<String> getUserId() {
+        return Optional.ofNullable(userId);
+    }
 }
-

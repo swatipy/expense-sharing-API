@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserBalance,String > {
+public interface ExpenseSharingRepository extends JpaRepository<UserBalance,String > {
 
     Optional<UserBalance> findByUserId(String userId);
+
 }
