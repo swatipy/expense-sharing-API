@@ -4,18 +4,20 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="user_balances")
-public class UserBalance {
+public class UserBalance implements UserBalanceInterface {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
-    private final String userId;
-    private final Double amount;
+    private String userId;
 
+    @Column
+    private Double amount;
 
+   public UserBalance(){
+
+   }
     public UserBalance(String userId, Double amount){
-        this.userId=userId;
-        this.amount=amount;
+       this.userId=userId;
+       this.amount=amount;
     }
     public Double getAmount() {
         return amount;
@@ -24,4 +26,8 @@ public class UserBalance {
     public String getUserId() {
         return userId;
     }
+    public void setAmount(double amount){
+        this.amount=amount;
+    }
 }
+
