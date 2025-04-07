@@ -54,21 +54,15 @@ src/
 
 ### Sample API Endpoints
 **|Method   | **Endpoint**  |         Description   |**
-POST	    /users	            Create a new user
-POST	    /groups	            Create a group
-POST	    /expenses	        Add an expense to a group
-GET	        /balances/{groupId}	Get balance sheet for a group
-POST	    /settle	            Record a settlement transaction
+  POST	    /users	            Create a new user
+  POST	    /expenses	          Add an expense 
+  POST	    /show               Show balances
+  
 
 
 ### Example: Add Expense Payload json 
 
 {
-"groupId": 1,
-"payerId": 2,
-"amount": 120.0,
-"description": "Dinner at Joe's",
-"splitBetween": [1, 2, 3]
 }
 ### Contributions
 Contributions welcome! Please open an issue or submit a pull request.
