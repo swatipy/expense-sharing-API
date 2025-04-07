@@ -35,7 +35,7 @@ git clone https://github.com/pinkish-code/expense-sharing-API.git
 ```
 ### Run the App
 ```bash
-mvn spring-boot:run
+./gradlew bootRun
 ```
 The API will start on: http://localhost:8080
 
@@ -63,14 +63,23 @@ src/
 |--------|-------------|--------------------|
 | POST   | `/users`    | Create a new user  |
 | POST   | `/expenses` | Add an expense     |
-| POST   | `/show`     | Show balance       |
+| POST   | `/show`     | Show balances      |
 
   
 
 
-### Example: Add Expense Payload json 
-
+### Example: Add Expense Payload json 	 
+		 
 {
+  "command": "EXPENSE",
+  "userId": "u1",
+  "expense": {
+    "paidBy": "u1",
+    "amountPaid": 200.0,
+    "userIds": ["u1", "u2", "u3"],
+    "splitType": "EXACT",
+    "values": [40, 100, 60]
+  }
 }
 ### Contributions
 Contributions welcome! Please open an issue or submit a pull request.
