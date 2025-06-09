@@ -1,14 +1,12 @@
 package org.example.controller;
 
-import org.example.model.ExpenseSharingBalanceOutput;
-import org.example.model.ExpenseSharingInput;
-import org.example.model.UserBalance;
+import org.example.model.*;
 import org.example.service.ExpenseSharingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -25,8 +23,30 @@ public class ExpenseSharingController {
     String output="";
 
 
-    @PostMapping("/process-api")
+//Add/Update Balances
+    @PostMapping("/expenses")
      public void updateBalance(@RequestBody ExpenseSharingInput expenseSharingInput) {
+
+        List<UserBalance> userBalances;
+        ExpenseSharingBalanceOutput expenseSharingBalanceOutput;
+        switch (expenseSharingInput.getCommand()) {
+            case EXPENSE:
+                userBalances = expenseSharingService.addExpense(expenseSharingInput.getExpense());
+                expenseSharingBalanceOutput = new ExpenseSharingBalanceOutput(userBalances);
+                output = ExpenseSharingController.createOutput(expenseSharingBalanceOutput);
+                break;
+            case SHOW_BALANCE, SHOW_BALANCE_FOR_A_USER:
+                userBalances = expenseSharingService.showBalances();
+                expenseSharingBalanceOutput = new ExpenseSharingBalanceOutput(userBalances);
+                output = ExpenseSharingController.createOutput(expenseSharingBalanceOutput);
+                break;
+        }
+        System.out.println(output);
+
+    }
+//Show balances
+    @GetMapping("/show")
+    public void updateBalances(@RequestBody ExpenseSharingInput expenseSharingInput) {
 
         List<UserBalance> userBalances;
         ExpenseSharingBalanceOutput expenseSharingBalanceOutput;
