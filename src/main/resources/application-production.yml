@@ -1,0 +1,20 @@
+server:
+  port: 8080   # Change the default port
+
+spring:
+  application:
+    name: Expense-sharing-API  # Application name
+  datasource:
+    url: jdbc:mysql://${EXPENSE_SHARING_RDS_URL}:3306/expense_sharing
+    username: ${EXPENSE_SHARING_USERNAME}
+    password: ${EXPENSE_SHARING_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true  # Print SQL queries in logs
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format-sql: true
+
