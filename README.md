@@ -84,13 +84,21 @@ src/
 ### Contributions
 Contributions welcome! Please open an issue or submit a pull request.
 
+### Run
+```shell
+java -Xms256m -Xmx700m -jar build/libs/Expense-sharing-API-1.0-SNAPSHOT.jar --spring.profiles.active=production
 
+```
+### Deploy to Prod
+```shell
+scp -i ~/Downloads/expkey.pem /Users/swati.gupta/code/Expense-sharing-API/build/libs/Expense-sharing-API-1.0-SNAPSHOT.jar ubuntu@3.108.252.183:/home/ubuntu/
 
+```
 
-
-
-
-
+### Login to instance
+```shell
+ssh -i ~/Downloads/expkey.pem ubuntu@3.108.252.183
+```
 
 
 
